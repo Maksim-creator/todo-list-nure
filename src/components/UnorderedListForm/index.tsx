@@ -3,76 +3,62 @@ import {
   Field, FieldArray, Form, Formik, FormikValues,
 } from 'formik';
 import Button from '../Button';
+import { NoteType } from '../../interface';
 
 interface Props {
-    handleCreate: (values: FormikValues) => void
+    handleCreate: (values: FormikValues, type: string) => void
 }
 
-const UnorderedListFrom: React.FC<Props> = ({ handleCreate }) => (
-  <Formik
-    initialValues={{ unorderedList: [''] }}
-    onSubmit={(fields: FormikValues, { resetForm }) => {
-      resetForm();
-      handleCreate(fields);
-    }}
-  >
-    {({ values, handleSubmit }) => (
-      <Form>
-        <FieldArray
-          name="unorderedList"
-          render={(arrayHelpers) => (
-            <ol>
-              {values.orderedList.map((item: any, index: number) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <li className="modalItem_inputWrapper" key={index}>
-                  <Field name={`orderedList.${index}`} className="modalItem_input" />
-                  <button
+const UnorderedListForm: React.FC<Props> = ({ handleCreate }) => (
+  <div>
+    <Formik
+      initialValues={{ unorderedList: [''] }}
+      onSubmit={(fields: FormikValues, { resetForm }) => {
+        resetForm();
+        handleCreate(fields, 'unorderedList');
+      }}
+    >
+      {({ values, handleSubmit }) => (
+        <Form>
+          <FieldArray
+            name="unorderedList"
+            render={(arrayHelpers) => (
+              <ul style={{ paddingLeft: 50 }}>
+                {values.unorderedList.map((item: any, index: number) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <li key={index}>
+                    <Field name={`unorderedList.${index}`} className="modalItem_input" />
+                    {index === values.unorderedList.length - 1 ? (
+                      <>
+                        <Button
                           type="button"
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                                          -
-                        </button>
-                  <button
+                          onPress={() => arrayHelpers.remove(values.unorderedList.length - 1)}
+                          label="-"
+                          styles={{
+                            paddingTop: 3, paddingBottom: 3, paddingLeft: 9, paddingRight: 9,
+                          }}
+                        />
+                        <Button
                           type="button"
-                          onClick={() => arrayHelpers.insert(values.orderedList.length, '')}
-                        >
-                                          +
-                        </button>
-                </li>
-              ))}
-            </ol>
-          )}
-        />
-        <Button label="Submit" type="submit" onPress={handleSubmit} />
-      </Form>
-    )}
-    {/* <div className="modalItem_wrapper"> */}
-    {/*  {type === TabsValues.TEXT && ( */}
-    {/*  <div className="modalItem_form"> */}
-    {/*    <textarea rows={20} cols={50} onChange={handleTextAreaChange} /> */}
-    {/*  </div> */}
-    {/*  )} */}
-    {/*  {type === TabsValues.ORDERED_LIST && ( */}
-    {/*  <div className="modalItem_form"> */}
-    {/*    <ol id="ordered-list"> */}
-    {/*      <FieldArray */}
-    {/*        name="ordered-list" */}
-    {/*        render={(arrayHelpers) => ( */}
-    {/*          <li> */}
-    {/*            <input onChange={handleTextAreaChange} className="modalItem_input" /> */}
-    {/*          </li> */}
-    {/*        )} */}
-    {/*      /> */}
-    {/*    </ol> */}
-    {/*    <Button */}
-    {/*      type="button" */}
-    {/*      label="Add point" */}
-    {/*      onPress={handleAddExtraInput('ol')} */}
-    {/*    /> */}
-    {/*  </div> */}
-    {/*  )} */}
+                          onPress={() => arrayHelpers.insert(values.unorderedList.length, '')}
+                          label="+"
+                          styles={{
+                            paddingTop: 3, paddingBottom: 3, paddingLeft: 9, paddingRight: 9,
+                          }}
+                        />
+                      </>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            )}
+          />
+          <Button label="Submit" type="submit" onPress={handleSubmit} />
+        </Form>
+      )}
+    </Formik>
 
-  </Formik>
+  </div>
 );
 
-export default UnorderedListFrom;
+export default UnorderedListForm;

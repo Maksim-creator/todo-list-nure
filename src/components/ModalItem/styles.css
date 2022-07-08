@@ -1,0 +1,55 @@
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.modalItem_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalItem_input {
+    margin-top: 14px;
+    width: 50%;
+    padding: 7px 12px;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+    transition: .4s all;
+    align-self: center;
+}
+
+.modalItem_inputWrapper {
+    /*display: flex;*/
+    list-style: decimal;
+}
+
+.modalItem_input:focus {
+    transition: .4s all;
+    border: 1px solid gray;
+    width: 50%;
+}
+
+.modalItem_form {
+    margin: 10px;
+}
+
+.closeIcon { cursor: pointer }
+
+.iconWrapper { text-align: right }
+
+.modalItem_title {
+    text-align:  center;
+    padding-bottom: 10px;
+}

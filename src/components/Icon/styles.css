@@ -1,0 +1,11 @@
+.note_textWrapper {
+    position: absolute;
+    color: black;
+    font-size: 13px;
+    width: 150px;
+    padding-left: 25px;
+    transform: rotate(-10deg);
+    bottom: 45%;
+    /*height: 250px;*/
+    /*background-color: gray;*/
+}
